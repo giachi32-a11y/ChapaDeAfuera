@@ -282,3 +282,44 @@ td:last-child, th:last-child {
   border-radius: 8px;
   cursor: pointer;
 }
+
+/* Protezione salvataggio per le immagini */
+.no-save {
+  -webkit-touch-callout: none !important; /* Blocco menu iOS */
+  -webkit-user-select: none !important;   /* Blocco selezione iOS */
+  user-select: none !important;           /* Blocco selezione generico */
+}
+
+/* Stili Modale Zoom */
+.photo-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.photo-modal img {
+  max-width: 85vw;
+  max-height: 85vw;
+  border-radius: 50%; /* Mantiene la forma tonda stile IG */
+  border: 4px solid #FF007F;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+  transform: scale(0.8);
+  transition: transform 0.25s ease-out;
+}
+
+.photo-modal.active {
+  display: flex;
+}
+
+.photo-modal.active img {
+  transform: scale(1);
+}
