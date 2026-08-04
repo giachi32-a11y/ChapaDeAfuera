@@ -3,37 +3,51 @@
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
+  /* Impedisce la selezione del testo e il doppio tap zoom */
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Blocca completamente il movimento/scroll della pagina intera */
+  position: fixed; /* Mantiene l'app piantata allo schermo */
   background-color: #FF007F; /* Rosa Fluo */
   color: #000000;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+}
+
+body {
+  padding: 20px 20px env(safe-area-inset-bottom) 20px;
 }
 
 .page {
   display: none;
   width: 100%;
-  max-width: 480px;
-  min-height: calc(100vh - 40px);
+  max-width: 400px;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  overflow-y: auto; /* Permette lo scroll solo se la lista supera la dimensione dello schermo */
+  -webkit-overflow-scrolling: touch;
 }
 
 .page.active {
   display: flex;
 }
 
-/* Home Layout: Titolo in alto, Bottoni al centro */
+/* Home Layout: Titolo fisso in alto, Bottoni bloccati al centro */
 #page-home {
-  justify-content: space-between; /* Mantiene intestazione in alto e bottoni staccati */
-  padding-top: 30px;
-  padding-bottom: 80px;
+  justify-content: space-between;
+  padding-top: 25px;
+  padding-bottom: 40px;
+  overflow: hidden; /* La home è 100% immobile */
 }
 
 .header-group {
@@ -44,39 +58,40 @@ body {
   width: 100%;
 }
 
-/* Titoli e Sottotitoli */
+/* Titolo Ridimensionato per stare perfettamente al centro dei margini */
 h1 {
   color: #000000;
   font-weight: 900;
   text-transform: uppercase;
-  font-size: 2.2rem;
-  letter-spacing: 1.5px;
-  margin-bottom: 6px;
+  font-size: 1.6rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+  white-space: nowrap;
 }
 
 .subtitle {
   color: #000000;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  text-transform: none; /* Rende il testo minuscolo (Normal Case) */
+  text-transform: none;
 }
 
 h2 {
   color: #000000;
   font-weight: 800;
-  font-size: 1.5rem;
-  margin-top: 20px;
+  font-size: 1.4rem;
+  margin-top: 15px;
   margin-bottom: 15px;
   text-transform: uppercase;
 }
 
-/* Gruppo bottoni centrale con Molta Aria */
+/* Gruppo bottoni centrale */
 .button-group {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 35px; /* Molto più spazio/aria tra ASSEGNA PUNTI e CLASSIFICA */
-  margin: auto 0; /* Spinge i bottoni esattamente al centro verticale */
+  gap: 25px;
+  margin: auto 0;
 }
 
 /* Bottoni Neri con testo Rosa Tiffany */
@@ -85,27 +100,28 @@ h2 {
   background-color: #000000;
   color: #81D8D0; /* Rosa Tiffany */
   border: none;
-  padding: 20px;
-  font-size: 1.15rem;
+  padding: 18px 15px;
+  font-size: 1.1rem;
   font-weight: 800;
   border-radius: 16px;
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.3);
   transition: transform 0.1s;
 }
 
 .btn:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .btn-secondary {
   background-color: #111111;
   color: #81D8D0;
-  margin-top: 25px;
-  font-size: 0.95rem;
-  padding: 14px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  padding: 12px;
 }
 
 /* Tabella Classifica */
@@ -115,7 +131,7 @@ h2 {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 table {
@@ -124,9 +140,9 @@ table {
 }
 
 th, td {
-  padding: 16px;
+  padding: 14px 16px;
   text-align: left;
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 th {
@@ -155,7 +171,7 @@ td:last-child, th:last-child {
   border-radius: 16px;
   margin: 20px 0;
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.5;
 }
 
