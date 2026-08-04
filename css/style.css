@@ -1,0 +1,134 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial Black', Impact, sans-serif;
+}
+
+body {
+  background-color: #FF007F; /* Rosa Fluo */
+  color: #000000; /* Titoli Neri */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.page {
+  display: none;
+  width: 100%;
+  max-width: 480px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.page.active {
+  display: flex;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Titoli Neri */
+h1, h2 {
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Bottoni Neri con testo Rosa Tiffany */
+.btn {
+  width: 100%;
+  background-color: #000000;
+  color: #81D8D0; /* Rosa Tiffany / Verde Tiffany tenue */
+  border: none;
+  padding: 18px 20px;
+  margin: 8px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background-color: #111111;
+  color: #81D8D0;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  padding: 12px;
+}
+
+/* Tabella Classifica */
+.table-container {
+  width: 100%;
+  background: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+th {
+  background-color: #000000;
+  color: #81D8D0;
+  text-transform: uppercase;
+  border-bottom: 2px solid #FF007F;
+}
+
+td {
+  color: #FFFFFF;
+  border-bottom: 1px solid #222;
+}
+
+td:last-child, th:last-child {
+  text-align: right;
+  color: #81D8D0;
+}
+
+.confirm-box {
+  background: #000000;
+  color: #FFFFFF;
+  padding: 25px;
+  border-radius: 16px;
+  margin: 20px 0;
+  width: 100%;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.confirm-box b {
+  color: #81D8D0;
+}
+
+.confirm-box span {
+  color: #FF007F;
+  font-weight: bold;
+}
