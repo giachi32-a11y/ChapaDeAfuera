@@ -3,9 +3,6 @@
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  -webkit-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -80,7 +77,7 @@ body {
   margin-top: 5px;
 }
 
-/* FOTO DI GRUPPO INGRANDITA (Dimensione 220px per riempire lo spazio) */
+/* FOTO DI GRUPPO INHOME */
 .home-photo-container {
   display: flex;
   justify-content: center;
@@ -95,6 +92,8 @@ body {
   object-fit: cover;
   border: 4px solid #000000;
   box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+  cursor: pointer;
+  touch-action: manipulation;
 }
 
 .full-width {
@@ -102,7 +101,7 @@ body {
 }
 
 h1 {
-  color: #8B004F; /* Rosa scuro profondo elegante */
+  color: #8B004F;
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
   text-transform: uppercase;
@@ -110,7 +109,7 @@ h1 {
   letter-spacing: 1px;
   margin-bottom: 6px;
   white-space: nowrap;
-  text-shadow: none; /* Rimuove completamente l'ombra */
+  text-shadow: none;
 }
 
 .subtitle {
@@ -285,9 +284,9 @@ td:last-child, th:last-child {
 
 /* Protezione salvataggio per le immagini */
 .no-save {
-  -webkit-touch-callout: none !important; /* Blocco menu iOS */
-  -webkit-user-select: none !important;   /* Blocco selezione iOS */
-  user-select: none !important;           /* Blocco selezione generico */
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
 }
 
 /* Stili Modale Zoom */
@@ -300,7 +299,7 @@ td:last-child, th:last-child {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(5px);
-  z-index: 9999;
+  z-index: 99999;
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -309,7 +308,10 @@ td:last-child, th:last-child {
 .photo-modal img {
   max-width: 85vw;
   max-height: 85vw;
-  border-radius: 50%; /* Mantiene la forma tonda stile IG */
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 50%;
   border: 4px solid #FF007F;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
   transform: scale(0.8);
@@ -317,7 +319,7 @@ td:last-child, th:last-child {
 }
 
 .photo-modal.active {
-  display: flex;
+  display: flex !important;
 }
 
 .photo-modal.active img {
