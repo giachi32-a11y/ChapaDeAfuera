@@ -22,9 +22,8 @@ html, body {
 }
 
 body {
-  /* Margin di sicurezza per l'Isola Dinamica / Notch in alto e la barra Home in basso */
-  padding-top: calc(env(safe-area-inset-top) + 20px);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+  padding-top: calc(env(safe-area-inset-top) + 15px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 15px);
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -70,17 +69,31 @@ body {
   display: flex;
 }
 
-/* Home Layout: Spazi ben bilanciati */
+/* Home Layout */
 #page-home {
   justify-content: space-between;
-  padding-top: 15px;
-  padding-bottom: 30px;
+  padding-top: 5px;
+  padding-bottom: 20px;
   overflow: hidden;
 }
 
 .header-group {
   width: 100%;
-  margin-top: 10px; /* Abbassa il titolo rispetto alla barra di stato dell'iPhone */
+  margin-top: 5px;
+}
+
+/* Stile Foto di Gruppo in Home */
+.home-photo-container {
+  margin: 10px 0;
+}
+
+.home-photo {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #000000;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
 }
 
 .full-width {
@@ -91,15 +104,15 @@ h1 {
   color: #000000;
   font-weight: 900;
   text-transform: uppercase;
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   letter-spacing: 0.5px;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   white-space: nowrap;
 }
 
 .subtitle {
   color: #000000;
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
   text-transform: none;
 }
@@ -113,28 +126,33 @@ h2 {
   text-transform: uppercase;
 }
 
-/* Gruppo bottoni centrale */
 .button-group {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  margin: auto 0;
+  gap: 14px;
 }
 
 .button-group .btn {
-  padding: 18px 15px;
-  font-size: 1.1rem;
+  padding: 14px 15px;
+  font-size: 1rem;
 }
 
-/* STILE GENERAL BOTTONI LISTA */
+.btn-admin {
+  background-color: #111111 !important;
+  color: #FF9EBB !important;
+  font-size: 0.85rem !important;
+  padding: 12px !important;
+  margin-top: 5px;
+}
+
 .btn {
   width: 100%;
   background-color: #000000;
   color: #FF9EBB; /* Rosa Tiffany */
   border: none;
   padding: 12px 14px;
-  margin: 5px 0;
+  margin: 4px 0;
   font-size: 0.9rem;
   font-weight: 700;
   border-radius: 12px;
@@ -216,4 +234,51 @@ td:last-child, th:last-child {
 .confirm-box span {
   color: #FF007F;
   font-weight: 800;
+}
+
+/* Interfaccia Correzione Punti */
+.correzione-container {
+  margin-top: 15px;
+}
+
+.correzione-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000000;
+  padding: 10px 15px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.correzione-nome {
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.correzione-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.correzione-punti {
+  color: #FF9EBB;
+  font-weight: 800;
+  font-size: 1.1rem;
+  min-width: 45px;
+  text-align: center;
+}
+
+.btn-mini {
+  background: #FF007F;
+  color: #000000;
+  border: none;
+  font-weight: 900;
+  font-size: 1.1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
 }
