@@ -290,13 +290,19 @@ td:last-child, th:last-child {
 }
 
 /* Stili Modale Zoom */
-.photo-modal { display: none;
-position: fixed;
-top: 0; left: 0;
-width: 100vw; height: 100vh;
-background-color: Igba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 99999;
-justify-content: center; align-items: center;
-cursor: pointer;
+.photo-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .photo-modal img {
