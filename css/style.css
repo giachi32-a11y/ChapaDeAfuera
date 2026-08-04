@@ -103,16 +103,18 @@ body {
 
 h1 {
   color: #000000;
-  font-weight: 900;
-  text-transform: uppercase;
-  font-size: 1.55rem;
+  font-family: 'Playfair Display', 'Brush Script MT', 'Great Vibes', cursive;
+  font-style: italic;
+  font-weight: 800;
+  text-transform: none; /* Rimuove lo stampatello */
+  font-size: 2.2rem;
   letter-spacing: 1px;
   margin-bottom: 6px;
   white-space: nowrap;
-  text-shadow: 
-    0 0 3px #FFFFFF,
-    0 0 10px #FF66CC,
-    0 0 20px #FF00FF;
+  
+  /* Bordo rosa chiaro a contrasto netto (senza sfocature) */
+  -webkit-text-stroke: 1.5px #FFD1DC;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
 .subtitle {
