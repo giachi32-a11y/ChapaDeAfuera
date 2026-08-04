@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FANTABARCELLONA</title>
+  
+  <meta name="theme-color" content="#FF007F">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 1. HOME PAGE -->
+  <div id="page-home" class="page active">
+    <h1>FANTABARCELLONA</h1>
+    <button class="btn" onclick="showPage('page-bonus-malus')">ASSEGNA PUNTI</button>
+    <button class="btn" onclick="openClassifica()">CLASSIFICA</button>
+  </div>
+
+  <!-- 2. SCELTA BONUS / MALUS -->
+  <div id="page-bonus-malus" class="page">
+    <h2>BONUS</h2>
+    <div id="bonus-list" class="full-width"></div>
+
+    <h2>MALUS</h2>
+    <div id="malus-list" class="full-width"></div>
+
+    <button class="btn btn-secondary" onclick="showPage('page-home')">⬅ Torna alla Home</button>
+  </div>
+
+  <!-- 3. SCELTA PERSONA -->
+  <div id="page-persone" class="page">
+    <h2>CHI HA FATTO L'AZIONE?</h2>
+    <div id="persone-list" class="full-width"></div>
+
+    <button class="btn btn-secondary" onclick="showPage('page-bonus-malus')">⬅ Indietro</button>
+  </div>
+
+  <!-- 4. CONFERMA -->
+  <div id="page-conferma" class="page">
+    <h1 id="persona-selezionata-title">NOME</h1>
+    
+    <div class="confirm-box" id="testo-conferma">
+      Confermi l'assegnazione dei punti?
+    </div>
+
+    <button class="btn" onclick="confermaAssegnazione()">CONFERMA</button>
+    <button class="btn btn-secondary" onclick="showPage('page-persone')">ANNULLA</button>
+  </div>
+
+  <!-- 5. CLASSIFICA -->
+  <div id="page-classifica" class="page">
+    <h1>CLASSIFICA</h1>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>NOME</th>
+            <th>PUNTEGGIO</th>
+          </tr>
+        </thead>
+        <tbody id="classifica-body"></tbody>
+      </table>
+    </div>
+
+    <button class="btn btn-secondary" onclick="showPage('page-home')">⬅ Torna alla Home</button>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
