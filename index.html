@@ -35,10 +35,16 @@
       <h1>FANTABARCELLONA</h1>
       <p class="subtitle">Benvenute al FantaBarcellona!</p>
     </div>
+
+    <!-- IMPOSTAZIONE FOTO DI GRUPPO HOME -->
+    <div class="home-photo-container">
+      <img src="icon.png" alt="ChapaDeAfuera" class="home-photo">
+    </div>
     
     <div class="button-group">
       <button class="btn" onclick="showPage('page-bonus-malus')">ASSEGNA PUNTI</button>
       <button class="btn" onclick="openClassifica()">CLASSIFICA</button>
+      <button class="btn btn-admin" onclick="accediCorrezione()">CORREGGI CLASSIFICA 🔒</button>
     </div>
   </div>
 
@@ -88,6 +94,16 @@
         <tbody id="classifica-body"></tbody>
       </table>
     </div>
+
+    <button class="btn btn-secondary" onclick="showPage('page-home')">⬅ Torna alla Home</button>
+  </div>
+
+  <!-- 6. CORREGGI CLASSIFICA (PROTETTO DA PASSWORD) -->
+  <div id="page-correzione" class="page">
+    <h1>CORREGGI PUNTI</h1>
+    <p class="subtitle">Modifica manuale dei punteggi</p>
+
+    <div id="correzione-list" class="full-width correzione-container"></div>
 
     <button class="btn btn-secondary" onclick="showPage('page-home')">⬅ Torna alla Home</button>
   </div>
