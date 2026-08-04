@@ -14,7 +14,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   position: fixed;
-  background-color: #FF007F; /* Rosa Fluo */
+  background-color: #FF007F;
   color: #000000;
   display: flex;
   flex-direction: column;
@@ -28,7 +28,6 @@ body {
   padding-right: 20px;
 }
 
-/* SPLASH SCREEN */
 #splash-screen {
   position: fixed;
   top: 0;
@@ -69,7 +68,6 @@ body {
   display: flex;
 }
 
-/* Home Layout */
 #page-home {
   justify-content: space-between;
   padding-top: 5px;
@@ -82,7 +80,6 @@ body {
   margin-top: 5px;
 }
 
-/* Stile Foto di Gruppo in Home */
 .home-photo-container {
   margin: 10px 0;
 }
@@ -138,18 +135,10 @@ h2 {
   font-size: 1rem;
 }
 
-.btn-admin {
-  background-color: #111111 !important;
-  color: #FF9EBB !important;
-  font-size: 0.85rem !important;
-  padding: 12px !important;
-  margin-top: 5px;
-}
-
 .btn {
   width: 100%;
   background-color: #000000;
-  color: #FF9EBB; /* Rosa Tiffany */
+  color: #FF9EBB;
   border: none;
   padding: 12px 14px;
   margin: 4px 0;
@@ -167,6 +156,14 @@ h2 {
   transform: scale(0.96);
 }
 
+.btn-admin {
+  background-color: #111111 !important;
+  color: #FF9EBB !important;
+  font-size: 0.85rem !important;
+  padding: 12px !important;
+  margin-top: 5px;
+}
+
 .btn-secondary {
   background-color: #111111;
   color: #FF9EBB;
@@ -176,7 +173,6 @@ h2 {
   padding: 12px;
 }
 
-/* Tabella Classifica */
 .table-container {
   width: 100%;
   background: #000000;
@@ -236,7 +232,6 @@ td:last-child, th:last-child {
   font-weight: 800;
 }
 
-/* Interfaccia Correzione Punti */
 .correzione-container {
   margin-top: 15px;
 }
