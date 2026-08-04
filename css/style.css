@@ -2,16 +2,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Arial Black', Impact, sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
   background-color: #FF007F; /* Rosa Fluo */
-  color: #000000; /* Titoli Neri */
+  color: #000000;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centra verticalmente il contenuto */
   align-items: center;
   padding: 20px;
 }
@@ -20,9 +19,9 @@ body {
   display: none;
   width: 100%;
   max-width: 480px;
+  min-height: calc(100vh - 40px);
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
 }
 
@@ -30,41 +29,54 @@ body {
   display: flex;
 }
 
+/* Home Layout: Titolo in alto, Bottoni al centro */
+#page-home {
+  justify-content: space-between; /* Mantiene intestazione in alto e bottoni staccati */
+  padding-top: 30px;
+  padding-bottom: 80px;
+}
+
+.header-group {
+  width: 100%;
+}
+
 .full-width {
   width: 100%;
 }
 
-/* Titoli e Sottotitoli Neri */
+/* Titoli e Sottotitoli */
 h1 {
   color: #000000;
+  font-weight: 900;
   text-transform: uppercase;
   font-size: 2.2rem;
-  letter-spacing: 1px;
-  margin-bottom: 12px; /* Spazio sotto al titolo */
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
 }
 
 .subtitle {
   color: #000000;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 45px; /* Più "aria" prima dei bottoni */
-  text-transform: uppercase;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: none; /* Rende il testo minuscolo (Normal Case) */
 }
 
 h2 {
   color: #000000;
+  font-weight: 800;
   font-size: 1.5rem;
   margin-top: 20px;
   margin-bottom: 15px;
   text-transform: uppercase;
 }
 
-/* Contenitore Bottoni con distanziamento */
+/* Gruppo bottoni centrale con Molta Aria */
 .button-group {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Più "aria" / spazio tra i due bottoni */
+  gap: 35px; /* Molto più spazio/aria tra ASSEGNA PUNTI e CLASSIFICA */
+  margin: auto 0; /* Spinge i bottoni esattamente al centro verticale */
 }
 
 /* Bottoni Neri con testo Rosa Tiffany */
@@ -73,13 +85,14 @@ h2 {
   background-color: #000000;
   color: #81D8D0; /* Rosa Tiffany */
   border: none;
-  padding: 18px 20px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 14px;
+  padding: 20px;
+  font-size: 1.15rem;
+  font-weight: 800;
+  border-radius: 16px;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  letter-spacing: 1px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
   transition: transform 0.1s;
 }
 
@@ -91,17 +104,18 @@ h2 {
   background-color: #111111;
   color: #81D8D0;
   margin-top: 25px;
-  font-size: 0.9rem;
-  padding: 12px;
+  font-size: 0.95rem;
+  padding: 14px;
 }
 
 /* Tabella Classifica */
 .table-container {
   width: 100%;
   background: #000000;
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  margin-top: 15px;
 }
 
 table {
@@ -110,20 +124,22 @@ table {
 }
 
 th, td {
-  padding: 14px 16px;
+  padding: 16px;
   text-align: left;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 th {
   background-color: #000000;
   color: #81D8D0;
+  font-weight: 800;
   text-transform: uppercase;
-  border-bottom: 2px solid #FF007F;
+  border-bottom: 3px solid #FF007F;
 }
 
 td {
   color: #FFFFFF;
+  font-weight: 600;
   border-bottom: 1px solid #222;
 }
 
@@ -149,5 +165,5 @@ td:last-child, th:last-child {
 
 .confirm-box span {
   color: #FF007F;
-  font-weight: bold;
+  font-weight: 800;
 }
