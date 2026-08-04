@@ -102,7 +102,7 @@ body {
 }
 
 h1 {
-  color: #8B004F; /* Rosa scuro/Magenta profondo che contrasta il fucsia */
+  color: #8B004F; /* Rosa scuro profondo elegante */
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
   text-transform: uppercase;
@@ -110,9 +110,7 @@ h1 {
   letter-spacing: 1px;
   margin-bottom: 6px;
   white-space: nowrap;
-  
-  /* Ombra netta e pulita spostata in basso a destra (effetto 3D) */
-  text-shadow: 2px 3px 0px #000000;
+  text-shadow: none; /* Rimuove completamente l'ombra */
 }
 
 .subtitle {
