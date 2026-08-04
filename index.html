@@ -2,11 +2,17 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <!-- BLOCCO ZOOM E RIDIMENSIONAMENTO PER APP NATIVA -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>FANTABARCELLONA</title>
+  <title>ChapaDeAfuera</title>
   
   <meta name="theme-color" content="#FF007F">
+
+  <!-- PWA & Icona per Web / iOS -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <meta name="apple-mobile-web-app-title" content="ChapaDeAfuera">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,6 +22,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
+  <!-- SPLASH SCREEN INIZIALE -->
+  <div id="splash-screen">
+    <div class="splash-text">💃 che la sfida abbia inizio 💃</div>
+  </div>
 
   <!-- 1. HOME PAGE -->
   <div id="page-home" class="page active">
