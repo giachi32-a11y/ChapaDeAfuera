@@ -22,10 +22,14 @@ html, body {
 }
 
 body {
-  padding: 20px 20px env(safe-area-inset-bottom) 20px;
+  /* Margin di sicurezza per l'Isola Dinamica / Notch in alto e la barra Home in basso */
+  padding-top: calc(env(safe-area-inset-top) + 20px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-/* SPLASH SCREEN STYLES */
+/* SPLASH SCREEN */
 #splash-screen {
   position: fixed;
   top: 0;
@@ -66,15 +70,17 @@ body {
   display: flex;
 }
 
+/* Home Layout: Spazi ben bilanciati */
 #page-home {
   justify-content: space-between;
-  padding-top: 25px;
-  padding-bottom: 40px;
+  padding-top: 15px;
+  padding-bottom: 30px;
   overflow: hidden;
 }
 
 .header-group {
   width: 100%;
+  margin-top: 10px; /* Abbassa il titolo rispetto alla barra di stato dell'iPhone */
 }
 
 .full-width {
@@ -87,7 +93,7 @@ h1 {
   text-transform: uppercase;
   font-size: 1.6rem;
   letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   white-space: nowrap;
 }
 
@@ -102,11 +108,12 @@ h2 {
   color: #000000;
   font-weight: 800;
   font-size: 1.25rem;
-  margin-top: 12px;
-  margin-bottom: 8px;
+  margin-top: 15px;
+  margin-bottom: 12px;
   text-transform: uppercase;
 }
 
+/* Gruppo bottoni centrale */
 .button-group {
   width: 100%;
   display: flex;
@@ -120,13 +127,14 @@ h2 {
   font-size: 1.1rem;
 }
 
+/* STILE GENERAL BOTTONI LISTA */
 .btn {
   width: 100%;
   background-color: #000000;
   color: #FF9EBB; /* Rosa Tiffany */
   border: none;
-  padding: 10px 14px;
-  margin: 4px 0;
+  padding: 12px 14px;
+  margin: 5px 0;
   font-size: 0.9rem;
   font-weight: 700;
   border-radius: 12px;
@@ -145,11 +153,12 @@ h2 {
   background-color: #111111;
   color: #FF9EBB;
   margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   font-size: 0.85rem;
-  padding: 10px;
+  padding: 12px;
 }
 
+/* Tabella Classifica */
 .table-container {
   width: 100%;
   background: #000000;
