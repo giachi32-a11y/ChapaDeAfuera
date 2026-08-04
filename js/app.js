@@ -139,11 +139,17 @@ function confermaAssegnazione() {
   showPage('page-home');
 }
 
+// CLASSIFICA CON ORDINAMENTO AUTOMATICO (Punti desc, Nome asc)
 function openClassifica() {
   let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
   let classificaOrdinata = Object.keys(classifica).map(nome => {
     return { nome: nome, punti: classifica[nome] };
-  }).sort((a, b) => b.punti - a.punti);
+  }).sort((a, b) => {
+    if (b.punti !== a.punti) {
+      return b.punti - a.punti; // Ordina per punti decrescenti
+    }
+    return a.nome.localeCompare(b.nome); // In caso di parità, ordina alfabeticamente
+  });
 
   const tbody = document.getElementById("classifica-body");
   tbody.innerHTML = "";
@@ -203,7 +209,7 @@ function modificaPuntiManuale(nome, delta) {
   document.getElementById(`punti-${nome}`).innerText = classifica[nome];
 }
 
-// AVVIO
+// AVVIO APPLICAZIONE
 window.onload = () => {
   inizializzaClassifica();
   renderBonusMalus();
@@ -220,34 +226,32 @@ window.onload = () => {
   }, 2000);
 };
 
-// Gestione Zoom e Protezione Immagine
+// GESTIONE ZOOM FOTO PROFILE & PROTEZIONE SALVATAGGIO
 document.addEventListener('DOMContentLoaded', () => {
-  // Seleziona la foto della home (assicurati che il tag <img> abbia la classe .group-photo o sostituisci con il tuo selettore)
-  const profileImg = document.querySelector('.group-photo') || document.querySelector('.profile-img') || document.querySelector('.central-photo img');
+  const profileImg = document.querySelector('.home-photo');
   const modal = document.getElementById('photo-modal');
   const modalImg = document.getElementById('modal-img');
 
-  if (profileImg) {
-    // Aggiunge la classe per bloccare il menu su iOS
-    profileImg.classList.add('no-save');
-
-    // Apri modale al click
-    profileImg.addEventListener('click', () => {
+  if (profileImg && modal && modalImg) {
+    // Apri modale al tap / click
+    profileImg.addEventListener('click', (e) => {
+      e.stopPropagation();
       modalImg.src = profileImg.src;
       modal.classList.add('active');
     });
 
-    // Blocco click destro
+    // Blocco pressione prolungata / salva immagine
     profileImg.addEventListener('contextmenu', (e) => e.preventDefault());
   }
 
   if (modal) {
-    // Chiudi modale cliccando ovunque sullo schermo
+    // Chiudi modale al tap ovunque
     modal.addEventListener('click', () => {
       modal.classList.remove('active');
     });
 
-    // Blocco click destro anche sulla foto ingrandita
-    modalImg.addEventListener('contextmenu', (e) => e.preventDefault());
+    if (modalImg) {
+      modalImg.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
   }
 });
