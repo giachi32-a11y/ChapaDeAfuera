@@ -13,7 +13,7 @@ const nomi = [
 
 // 2. LISTA BONUS E MALUS
 const azioni = [
-  // BONUS (Punti Positivi)
+  // BONUS
   { testo: "Fare una cosa a tre", punti: 500 },
   { testo: "Portarsi gente in casa", punti: 250 },
   { testo: "Andare oltre al bacio (scopata)", punti: 200 },
@@ -30,7 +30,7 @@ const azioni = [
   { testo: "Chi fa una foto con il buttafuori", punti: 15 },
   { testo: "Chi fa tatuaggi o pearcing", punti: 10 },
 
-  // MALUS (Punti Negativi)
+  // MALUS
   { testo: "Sentire l'ex in vacanza o scopa amici attuali/storici", punti: -200 },
   { testo: "Chi salta una serata perché \"stanca\"", punti: -150 },
   { testo: "Farsi buttare fuori dalla disco", punti: -100 },
@@ -49,7 +49,6 @@ const azioni = [
   { testo: "Chi dice “stasera non bevo” e poi è la prima a ubriacarsi", punti: -10 }
 ];
 
-// STATO DELL'APPLICAZIONE
 let selezioni = {
   azione: null,
   punti: 0,
@@ -76,7 +75,7 @@ function showPage(pageId) {
   document.getElementById(pageId).classList.add('active');
 }
 
-// CARICA LE LISTE BONUS E MALUS
+// RENDER BONUS / MALUS
 function renderBonusMalus() {
   const bonusList = document.getElementById("bonus-list");
   const malusList = document.getElementById("malus-list");
@@ -87,11 +86,8 @@ function renderBonusMalus() {
   azioni.forEach(item => {
     const btn = document.createElement("button");
     btn.className = "btn";
-    
-    // Mostra il segno + per i bonus
     const segno = item.punti > 0 ? `+${item.punti}` : `${item.punti}`;
     btn.innerText = `${item.testo} (${segno})`;
-    
     btn.onclick = () => selezionaAzione(item.testo, item.punti);
 
     if (item.punti > 0) {
@@ -102,7 +98,7 @@ function renderBonusMalus() {
   });
 }
 
-// CARICA LA LISTA PERSONE
+// RENDER PERSONE
 function renderPersone() {
   const personeList = document.getElementById("persone-list");
   personeList.innerHTML = "";
@@ -116,48 +112,35 @@ function renderPersone() {
   });
 }
 
-// SELEZIONE AZIONE
 function selezionaAzione(testo, punti) {
   selezioni.azione = testo;
   selezioni.punti = punti;
   showPage('page-persone');
 }
 
-// SELEZIONE PERSONA E SCHERMATA CONFERMA
 function selezionaPersona(nome) {
   selezioni.persona = nome;
-  
   document.getElementById("persona-selezionata-title").innerText = nome;
-  
   const segno = selezioni.punti > 0 ? `+${selezioni.punti}` : `${selezioni.punti}`;
   document.getElementById("testo-conferma").innerHTML = 
     `Confermi di voler assegnare a <b>${nome}</b>:<br><br><span>${selezioni.azione} (${segno} Punti)</span>?`;
-    
   showPage('page-conferma');
 }
 
-// CONFERMA ASSEGNAZIONE E AGGIORNAMENTO PUNTEGGIO
 function confermaAssegnazione() {
   let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
-  
   if (classifica[selezioni.persona] !== undefined) {
     classifica[selezioni.persona] += selezioni.punti;
   } else {
     classifica[selezioni.persona] = selezioni.punti;
   }
-
   localStorage.setItem("fanta_classifica", JSON.stringify(classifica));
-  
-  // Resetta selezioni e torna alla home
   selezioni = { azione: null, punti: 0, persona: null };
   showPage('page-home');
 }
 
-// APRI E ORDINA CLASSIFICA
 function openClassifica() {
   let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
-  
-  // Converte l'oggetto in un array ordinato per punteggio decrescente
   let classificaOrdinata = Object.keys(classifica).map(nome => {
     return { nome: nome, punti: classifica[nome] };
   }).sort((a, b) => b.punti - a.punti);
@@ -177,20 +160,55 @@ function openClassifica() {
   showPage('page-classifica');
 }
 
-// INIZIALIZZA L'APP ALL'AVVIO
+// CONTROLLO PASSWORD PER CORREZIONE
+function accediCorrezione() {
+  const pw = prompt("Inserisci la password per modificare i punti:");
+  if (pw === "GreBarcellona26") {
+    renderCorrezione();
+    showPage('page-correzione');
+  } else if (pw !== null) {
+    alert("Password errata!");
+  }
+}
+
+// RENDER PAGINA CORREZIONE
+function renderCorrezione() {
+  let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
+  const container = document.getElementById("correzione-list");
+  container.innerHTML = "";
+
+  nomi.forEach(nome => {
+    const puntiAttuali = classifica[nome] || 0;
+    const row = document.createElement("div");
+    row.className = "correzione-row";
+    row.innerHTML = `
+      <span class="correzione-nome">${nome}</span>
+      <div class="correzione-controls">
+        <button class="btn-mini" onclick="modificaPuntiManuale('${nome}', -5)">-</button>
+        <span class="correzione-punti" id="punti-${nome}">${puntiAttuali}</span>
+        <button class="btn-mini" onclick="modificaPuntiManuale('${nome}', 5)">+</button>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+// MODIFICA MANUALE DEI PUNTI (+5 / -5 per click)
+function modificaPuntiManuale(nome, delta) {
+  let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
+  classifica[nome] = (classifica[nome] || 0) + delta;
+  localStorage.setItem("fanta_classifica", JSON.stringify(classifica));
+  
+  // Aggiorna il numero a schermo al volo
+  document.getElementById(`punti-${nome}`).innerText = classifica[nome];
+}
+
+// AVVIO
 window.onload = () => {
   inizializzaClassifica();
   renderBonusMalus();
   renderPersone();
-};
 
-// Gestione dello Splash Screen all'avvio
-window.onload = () => {
-  inizializzaClassifica();
-  renderBonusMalus();
-  renderPersone();
-
-  // Nasconde lo splash screen dopo 2 secondi
   setTimeout(() => {
     const splash = document.getElementById("splash-screen");
     if (splash) {
@@ -201,4 +219,3 @@ window.onload = () => {
     }
   }, 2000);
 };
-
