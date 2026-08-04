@@ -1,0 +1,16 @@
+{
+  "name": "ChapaDeAfuera",
+  "short_name": "ChapaDeAfuera",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FF007F",
+  "theme_color": "#FF007F",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
