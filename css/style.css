@@ -102,19 +102,17 @@ body {
 }
 
 h1 {
-  color: #000000;
-  font-family: 'Playfair Display', 'Brush Script MT', 'Great Vibes', cursive;
-  font-style: italic;
-  font-weight: 800;
-  text-transform: none; /* Rimuove lo stampatello */
-  font-size: 2.2rem;
+  color: #8B004F; /* Rosa scuro/Magenta profondo che contrasta il fucsia */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 1.55rem;
   letter-spacing: 1px;
   margin-bottom: 6px;
   white-space: nowrap;
   
-  /* Bordo rosa chiaro a contrasto netto (senza sfocature) */
-  -webkit-text-stroke: 1.5px #FFD1DC;
-  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+  /* Ombra netta e pulita spostata in basso a destra (effetto 3D) */
+  text-shadow: 2px 3px 0px #000000;
 }
 
 .subtitle {
