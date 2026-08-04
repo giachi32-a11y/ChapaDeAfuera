@@ -219,3 +219,35 @@ window.onload = () => {
     }
   }, 2000);
 };
+
+// Gestione Zoom e Protezione Immagine
+document.addEventListener('DOMContentLoaded', () => {
+  // Seleziona la foto della home (assicurati che il tag <img> abbia la classe .group-photo o sostituisci con il tuo selettore)
+  const profileImg = document.querySelector('.group-photo') || document.querySelector('.profile-img') || document.querySelector('.central-photo img');
+  const modal = document.getElementById('photo-modal');
+  const modalImg = document.getElementById('modal-img');
+
+  if (profileImg) {
+    // Aggiunge la classe per bloccare il menu su iOS
+    profileImg.classList.add('no-save');
+
+    // Apri modale al click
+    profileImg.addEventListener('click', () => {
+      modalImg.src = profileImg.src;
+      modal.classList.add('active');
+    });
+
+    // Blocco click destro
+    profileImg.addEventListener('contextmenu', (e) => e.preventDefault());
+  }
+
+  if (modal) {
+    // Chiudi modale cliccando ovunque sullo schermo
+    modal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    // Blocco click destro anche sulla foto ingrandita
+    modalImg.addEventListener('contextmenu', (e) => e.preventDefault());
+  }
+});
