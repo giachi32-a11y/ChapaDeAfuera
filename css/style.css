@@ -106,9 +106,13 @@ h1 {
   font-weight: 900;
   text-transform: uppercase;
   font-size: 1.55rem;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
   white-space: nowrap;
+  text-shadow: 
+    0 0 3px #FFFFFF,
+    0 0 10px #FF66CC,
+    0 0 20px #FF00FF;
 }
 
 .subtitle {
