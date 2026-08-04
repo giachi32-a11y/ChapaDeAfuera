@@ -34,7 +34,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  overflow-y: auto; /* Permette lo scroll solo se la lista supera la dimensione dello schermo */
+  overflow-y: auto; /* Permette lo scroll se la lista supera la dimensione dello schermo */
   -webkit-overflow-scrolling: touch;
 }
 
@@ -47,7 +47,7 @@ body {
   justify-content: space-between;
   padding-top: 25px;
   padding-bottom: 40px;
-  overflow: hidden; /* La home è 100% immobile */
+  overflow: hidden;
 }
 
 .header-group {
@@ -58,7 +58,7 @@ body {
   width: 100%;
 }
 
-/* Titolo Ridimensionato per stare perfettamente al centro dei margini */
+/* Titolo e Sottotitolo */
 h1 {
   color: #000000;
   font-weight: 900;
@@ -79,13 +79,13 @@ h1 {
 h2 {
   color: #000000;
   font-weight: 800;
-  font-size: 1.4rem;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  font-size: 1.25rem;
+  margin-top: 12px;
+  margin-bottom: 8px;
   text-transform: uppercase;
 }
 
-/* Gruppo bottoni centrale */
+/* Gruppo bottoni principale (Home) */
 .button-group {
   width: 100%;
   display: flex;
@@ -94,20 +94,27 @@ h2 {
   margin: auto 0;
 }
 
-/* Bottoni Neri con testo Rosa Tiffany */
+/* Bottoni principali in Home */
+.button-group .btn {
+  padding: 18px 15px;
+  font-size: 1.1rem;
+}
+
+/* STILE GENERALE BOTTONI: Fondo Nero, Testo Rosa Tiffany (#FF9EBB) */
 .btn {
   width: 100%;
   background-color: #000000;
-  color: #81D8D0; /* Rosa Tiffany */
+  color: #FF9EBB; /* Rosa Tiffany / Rosa Chiaro */
   border: none;
-  padding: 18px 15px;
-  font-size: 1.1rem;
-  font-weight: 800;
-  border-radius: 16px;
+  padding: 10px 14px; /* Ridotto: bottoni delle liste più compatti */
+  margin: 4px 0; /* Meno spazio tra i bottoni della lista */
+  font-size: 0.9rem; /* Testo più contenuto */
+  font-weight: 700;
+  border-radius: 12px;
   cursor: pointer;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
   transition: transform 0.1s;
 }
 
@@ -117,11 +124,11 @@ h2 {
 
 .btn-secondary {
   background-color: #111111;
-  color: #81D8D0;
-  margin-top: 20px;
+  color: #FF9EBB;
+  margin-top: 15px;
   margin-bottom: 15px;
-  font-size: 0.9rem;
-  padding: 12px;
+  font-size: 0.85rem;
+  padding: 10px;
 }
 
 /* Tabella Classifica */
@@ -140,14 +147,14 @@ table {
 }
 
 th, td {
-  padding: 14px 16px;
+  padding: 12px 16px;
   text-align: left;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 th {
   background-color: #000000;
-  color: #81D8D0;
+  color: #FF9EBB; /* Testo Intestazione Rosa Tiffany */
   font-weight: 800;
   text-transform: uppercase;
   border-bottom: 3px solid #FF007F;
@@ -161,22 +168,22 @@ td {
 
 td:last-child, th:last-child {
   text-align: right;
-  color: #81D8D0;
+  color: #FF9EBB; /* Testo Punti Rosa Tiffany */
 }
 
 .confirm-box {
   background: #000000;
   color: #FFFFFF;
-  padding: 25px;
+  padding: 20px;
   border-radius: 16px;
-  margin: 20px 0;
+  margin: 15px 0;
   width: 100%;
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
 .confirm-box b {
-  color: #81D8D0;
+  color: #FF9EBB;
 }
 
 .confirm-box span {
