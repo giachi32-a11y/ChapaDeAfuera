@@ -2,8 +2,8 @@
 
 // I 9 nomi del gruppo (Puoi modificarli qui)
 const nomiDefault = [
-  "Marco", "Luca", "Giulia", "Sofia", "Andrea", 
-  "Matteo", "Elena", "Francesca", "Alessandro"
+  "Cami", "Gre", "Ali", "Sofi", "Franca", 
+  "Gaia", "Vane", "Sylvie", "Anna"
 ];
 
 // Lista dei Bonus (+ punti)
