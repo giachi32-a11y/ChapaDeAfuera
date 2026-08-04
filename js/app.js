@@ -183,3 +183,22 @@ window.onload = () => {
   renderBonusMalus();
   renderPersone();
 };
+
+// Gestione dello Splash Screen all'avvio
+window.onload = () => {
+  inizializzaClassifica();
+  renderBonusMalus();
+  renderPersone();
+
+  // Nasconde lo splash screen dopo 2 secondi
+  setTimeout(() => {
+    const splash = document.getElementById("splash-screen");
+    if (splash) {
+      splash.style.opacity = "0";
+      setTimeout(() => {
+        splash.style.display = "none";
+      }, 500);
+    }
+  }, 2000);
+};
+
