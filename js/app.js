@@ -70,19 +70,6 @@ let selezioni = {
   persona: null
 };
 
-// INIZIALIZZAZIONE CLASSIFICA SU FIREBASE (Solo se vuota sul Cloud)
-function inizializzaClassifica() {
-  database.ref('classifica').once('value', (snapshot) => {
-    if (!snapshot.exists()) {
-      let classificaIniziale = {};
-      nomi.forEach(nome => {
-        classificaIniziale[nome] = 0;
-      });
-      database.ref('classifica').set(classificaIniziale);
-    }
-  });
-}
-
 // CAMBIO PAGINA
 function showPage(pageId) {
   document.querySelectorAll('.page').forEach(page => {
@@ -234,7 +221,6 @@ function modificaPuntiManuale(nome, delta) {
 
 // AVVIO APPLICAZIONE
 window.onload = () => {
-  inizializzaClassifica();
   renderBonusMalus();
   renderPersone();
 
