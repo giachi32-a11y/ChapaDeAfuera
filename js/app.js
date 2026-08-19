@@ -1,3 +1,18 @@
+// CONFIGURAZIONE FIREBASE
+const firebaseConfig = {
+  apiKey: "AIzaSyBbCvJu1gVl9DjU3cozvsRpqCXI1JsIsH0",
+  authDomain: "fantabarcellona.firebaseapp.com",
+  databaseURL: "https://fantabarcellona-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "fantabarcellona",
+  storageBucket: "fantabarcellona.firebasestorage.app",
+  messagingSenderId: "867257608994",
+  appId: "1:867257608994:web:f5cb258f858b938073537b"
+};
+
+// Inizializza Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
 // 1. LISTA PARTECIPANTI
 const nomi = [
   "cami",
@@ -55,16 +70,17 @@ let selezioni = {
   persona: null
 };
 
-// INIZIALIZZAZIONE CLASSIFICA IN LOCALSTORAGE
+// INIZIALIZZAZIONE CLASSIFICA SU FIREBASE (Solo se vuota sul Cloud)
 function inizializzaClassifica() {
-  let salvataggio = localStorage.getItem("fanta_classifica");
-  if (!salvataggio) {
-    let classificaIniziale = {};
-    nomi.forEach(nome => {
-      classificaIniziale[nome] = 0;
-    });
-    localStorage.setItem("fanta_classifica", JSON.stringify(classificaIniziale));
-  }
+  database.ref('classifica').once('value', (snapshot) => {
+    if (!snapshot.exists()) {
+      let classificaIniziale = {};
+      nomi.forEach(nome => {
+        classificaIniziale[nome] = 0;
+      });
+      database.ref('classifica').set(classificaIniziale);
+    }
+  });
 }
 
 // CAMBIO PAGINA
@@ -127,43 +143,46 @@ function selezionaPersona(nome) {
   showPage('page-conferma');
 }
 
+// ASSEGNAZIONE PUNTI CON TRANSAZIONE SICURA CLOUD
 function confermaAssegnazione() {
-  let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
-  if (classifica[selezioni.persona] !== undefined) {
-    classifica[selezioni.persona] += selezioni.punti;
-  } else {
-    classifica[selezioni.persona] = selezioni.punti;
-  }
-  localStorage.setItem("fanta_classifica", JSON.stringify(classifica));
-  selezioni = { azione: null, punti: 0, persona: null };
-  showPage('page-home');
+  const refPersona = database.ref('classifica/' + selezioni.persona);
+  refPersona.transaction((currentPoints) => {
+    return (currentPoints || 0) + selezioni.punti;
+  }, (error, committed) => {
+    if (committed) {
+      selezioni = { azione: null, punti: 0, persona: null };
+      showPage('page-home');
+    }
+  });
 }
 
-// CLASSIFICA CON ORDINAMENTO AUTOMATICO (Punti desc, Nome asc)
+// OPEN CLASSIFICA DA FIREBASE
 function openClassifica() {
-  let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
-  let classificaOrdinata = Object.keys(classifica).map(nome => {
-    return { nome: nome, punti: classifica[nome] };
-  }).sort((a, b) => {
-    if (b.punti !== a.punti) {
-      return b.punti - a.punti; // Ordina per punti decrescenti
-    }
-    return a.nome.localeCompare(b.nome); // In caso di parità, ordina alfabeticamente
+  database.ref('classifica').once('value', (snapshot) => {
+    let classifica = snapshot.val() || {};
+    let classificaOrdinata = Object.keys(classifica).map(nome => {
+      return { nome: nome, punti: classifica[nome] };
+    }).sort((a, b) => {
+      if (b.punti !== a.punti) {
+        return b.punti - a.punti;
+      }
+      return a.nome.localeCompare(b.nome);
+    });
+
+    const tbody = document.getElementById("classifica-body");
+    tbody.innerHTML = "";
+
+    classificaOrdinata.forEach(item => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${item.nome}</td>
+        <td>${item.punti}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    showPage('page-classifica');
   });
-
-  const tbody = document.getElementById("classifica-body");
-  tbody.innerHTML = "";
-
-  classificaOrdinata.forEach(item => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${item.nome}</td>
-      <td>${item.punti}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-
-  showPage('page-classifica');
 }
 
 // CONTROLLO PASSWORD PER CORREZIONE
@@ -179,34 +198,38 @@ function accediCorrezione() {
 
 // RENDER PAGINA CORREZIONE
 function renderCorrezione() {
-  let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
-  const container = document.getElementById("correzione-list");
-  container.innerHTML = "";
+  database.ref('classifica').once('value', (snapshot) => {
+    let classifica = snapshot.val() || {};
+    const container = document.getElementById("correzione-list");
+    container.innerHTML = "";
 
-  nomi.forEach(nome => {
-    const puntiAttuali = classifica[nome] || 0;
-    const row = document.createElement("div");
-    row.className = "correzione-row";
-    row.innerHTML = `
-      <span class="correzione-nome">${nome}</span>
-      <div class="correzione-controls">
-        <button class="btn-mini" onclick="modificaPuntiManuale('${nome}', -5)">-</button>
-        <span class="correzione-punti" id="punti-${nome}">${puntiAttuali}</span>
-        <button class="btn-mini" onclick="modificaPuntiManuale('${nome}', 5)">+</button>
-      </div>
-    `;
-    container.appendChild(row);
+    nomi.forEach(nome => {
+      const puntiAttuali = classifica[nome] || 0;
+      const row = document.createElement("div");
+      row.className = "correzione-row";
+      row.innerHTML = `
+        <span class="correzione-nome">${nome}</span>
+        <div class="correzione-controls">
+          <button class="btn-mini" onclick="modificaPuntiManuale('${nome}', -5)">-</button>
+          <span class="correzione-punti" id="punti-${nome}">${puntiAttuali}</span>
+          <button class="btn-mini" onclick="modificaPuntiManuale('${nome}', 5)">+</button>
+        </div>
+      `;
+      container.appendChild(row);
+    });
   });
 }
 
-// MODIFICA MANUALE DEI PUNTI (+5 / -5 per click)
+// MODIFICA MANUALE DEI PUNTI SU FIREBASE (+5 / -5)
 function modificaPuntiManuale(nome, delta) {
-  let classifica = JSON.parse(localStorage.getItem("fanta_classifica")) || {};
-  classifica[nome] = (classifica[nome] || 0) + delta;
-  localStorage.setItem("fanta_classifica", JSON.stringify(classifica));
-  
-  // Aggiorna il numero a schermo al volo
-  document.getElementById(`punti-${nome}`).innerText = classifica[nome];
+  const refPersona = database.ref('classifica/' + nome);
+  refPersona.transaction((currentPoints) => {
+    return (currentPoints || 0) + delta;
+  }, (error, committed, snapshot) => {
+    if (committed) {
+      document.getElementById(`punti-${nome}`).innerText = snapshot.val();
+    }
+  });
 }
 
 // AVVIO APPLICAZIONE
@@ -226,32 +249,31 @@ window.onload = () => {
   }, 2000);
 };
 
-// GESTIONE ZOOM FOTO PROFILE & PROTEZIONE SALVATAGGIO
+// GESTIONE ZOOM FOTO PROFILE & PROTEZIONE TRASCINAMENTO
 document.addEventListener('DOMContentLoaded', () => {
   const profileImg = document.querySelector('.home-photo');
   const modal = document.getElementById('photo-modal');
   const modalImg = document.getElementById('modal-img');
 
   if (profileImg && modal && modalImg) {
-    // Apri modale al tap / click
     profileImg.addEventListener('click', (e) => {
       e.stopPropagation();
       modalImg.src = profileImg.src;
       modal.classList.add('active');
     });
 
-    // Blocco pressione prolungata / salva immagine
     profileImg.addEventListener('contextmenu', (e) => e.preventDefault());
+    profileImg.addEventListener('dragstart', (e) => e.preventDefault());
   }
 
   if (modal) {
-    // Chiudi modale al tap ovunque
     modal.addEventListener('click', () => {
       modal.classList.remove('active');
     });
 
     if (modalImg) {
       modalImg.addEventListener('contextmenu', (e) => e.preventDefault());
+      modalImg.addEventListener('dragstart', (e) => e.preventDefault());
     }
   }
 });
