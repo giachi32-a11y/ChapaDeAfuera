@@ -70,6 +70,28 @@ let selezioni = {
   persona: null
 };
 
+// MIGRAZIONE AUTOMATICA DEI VECCHI PUNTI SALVATI SUL TELEFONO
+function migraPuntiLocali() {
+  let salvataggio = localStorage.getItem("fanta_classifica");
+  if (salvataggio) {
+    try {
+      let vecchiPunti = JSON.parse(salvataggio);
+      database.ref('classifica').once('value', (snapshot) => {
+        let datiServer = snapshot.val() || {};
+        nomi.forEach(nome => {
+          if (vecchiPunti[nome] !== undefined && vecchiPunti[nome] !== 0) {
+            if (!datiServer[nome] || datiServer[nome] === 0) {
+              database.ref('classifica/' + nome).set(vecchiPunti[nome]);
+            }
+          }
+        });
+      });
+    } catch (e) {
+      console.log("Errore migrazione:", e);
+    }
+  }
+}
+
 // CAMBIO PAGINA
 function showPage(pageId) {
   document.querySelectorAll('.page').forEach(page => {
@@ -147,6 +169,14 @@ function confermaAssegnazione() {
 function openClassifica() {
   database.ref('classifica').once('value', (snapshot) => {
     let classifica = snapshot.val() || {};
+
+    // Assicura che tutti i 9 nomi siano visibili in tabella
+    nomi.forEach(nome => {
+      if (classifica[nome] === undefined) {
+        classifica[nome] = 0;
+      }
+    });
+
     let classificaOrdinata = Object.keys(classifica).map(nome => {
       return { nome: nome, punti: classifica[nome] };
     }).sort((a, b) => {
@@ -221,6 +251,7 @@ function modificaPuntiManuale(nome, delta) {
 
 // AVVIO APPLICAZIONE
 window.onload = () => {
+  migraPuntiLocali();
   renderBonusMalus();
   renderPersone();
 
